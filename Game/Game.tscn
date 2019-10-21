@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Game/Game.gd" type="Script" id=1]
 [ext_resource path="res://Game/UI/UI.gd" type="Script" id=2]
 [ext_resource path="res://Fonts/Font_14.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Game/UI/buy_knob_btn.png" type="Texture" id=4]
-[ext_resource path="res://Game/Walls.gd" type="Script" id=5]
-[ext_resource path="res://Knobs/KnobsManager.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/UI/buy_knob_btn_disabled.png" type="Texture" id=4]
+[ext_resource path="res://Game/UI/buy_knob_btn_pressed.png" type="Texture" id=5]
+[ext_resource path="res://Game/Walls.gd" type="Script" id=6]
+[ext_resource path="res://Knobs/KnobsManager.tscn" type="PackedScene" id=7]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.5
@@ -69,6 +70,8 @@ margin_bottom = 21.0
 [node name="BuyKnobBtn" type="TouchScreenButton" parent="UI/MarginContainer/VBoxContainer/Control"]
 position = Vector2( 0, 0.463303 )
 normal = ExtResource( 4 )
+pressed = ExtResource( 5 )
+passby_press = true
 
 [node name="KnobPrice" type="Label" parent="UI/MarginContainer/VBoxContainer/Control/BuyKnobBtn"]
 margin_left = 25.0
@@ -82,7 +85,7 @@ valign = 1
 
 [node name="Walls" type="StaticBody2D" parent="World"]
 physics_material_override = SubResource( 1 )
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Walls"]
 position = Vector2( -70, 120 )
@@ -100,6 +103,6 @@ shape = SubResource( 3 )
 position = Vector2( 85, 305 )
 shape = SubResource( 3 )
 
-[node name="KnobsManager" parent="World" instance=ExtResource( 6 )]
+[node name="KnobsManager" parent="World" instance=ExtResource( 7 )]
 position = Vector2( 80, 50 )
-[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/Control/BuyKnobBtn" to="UI" method="_on_BuyKnobBtn_pressed"]
+[connection signal="released" from="UI/MarginContainer/VBoxContainer/Control/BuyKnobBtn" to="UI" method="_on_BuyKnobBtn_released"]
