@@ -7,6 +7,8 @@
 z_index = 150
 z_as_relative = false
 script = ExtResource( 1 )
+start_color = Color( 1, 1, 1, 1 )
+end_color = Color( 0.0196078, 0.0509804, 0.501961, 0 )
 
 [node name="HitAreaSprite" type="Sprite" parent="."]
 scale = Vector2( 1e-005, 1e-005 )

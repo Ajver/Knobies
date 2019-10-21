@@ -1,5 +1,8 @@
 extends Node2D
 
+export(Color) var start_color
+export(Color) var end_color
+
 onready var hit_area_sprite = $HitAreaSprite
 onready var scale_tween = $ScaleTween
 onready var alpha_tween = $AlphaTween
@@ -37,7 +40,7 @@ func run_animations() -> void:
 	var texture_width : float = hit_area_sprite.texture.get_width()
 	var target_sprite_scale : float = radius / texture_width
 	
-	alpha_tween.interpolate_property(self, "modulate", hit_area_sprite.modulate, Color(0, 0, 0, 0), animation_duration, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	alpha_tween.interpolate_property(self, "modulate", start_color, end_color, animation_duration, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	alpha_tween.start()
 	
 	scale_tween.interpolate_property(hit_area_sprite, "scale", Vector2(0, 0), Vector2(target_sprite_scale, target_sprite_scale), animation_duration, Tween.TRANS_LINEAR, Tween.EASE_OUT)

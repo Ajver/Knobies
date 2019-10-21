@@ -17,11 +17,14 @@ _global_script_class_icons={
 
 config/name="Knobies"
 run/main_scene="res://Game/Game.tscn"
+boot_splash/image="res://icon.png"
+boot_splash/fullsize=false
 config/icon="res://icon.png"
 
 [autoload]
 
 GameData="*res://Scripts/GameData.gd"
+GameTheme="*res://Scripts/GameTheme.gd"
 
 [display]
 
@@ -44,14 +47,18 @@ exit_game={
 
 pointing/emulate_touch_from_mouse=true
 
+[network]
+
+limits/debugger_stdout/max_messages_per_frame=60
+limits/debugger_stdout/max_errors_per_frame=60
+
 [physics]
 
-2d/thread_model=2
-2d/default_gravity=196
+2d/default_gravity=400
 
 [rendering]
 
 quality/driver/driver_name="GLES2"
+quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
-vram_compression/import_etc2=false
 environment/default_environment="res://default_env.tres"

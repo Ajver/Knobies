@@ -5,8 +5,8 @@ var max_speed_sqr = max_speed*max_speed
 
 func _ready():
 	var sprite = get_node("Sprite")
-	sprite.texture = GameData.get_random_knob_sprite()
-	sprite.modulate = GameData.get_random_knob_color()
+	sprite.texture = GameTheme.get_random_knob_sprite()
+	sprite.modulate = GameTheme.get_random_knob_color()
 
 func on_hit(force:Vector2) -> void:
 	apply_central_impulse(force)
