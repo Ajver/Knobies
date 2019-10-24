@@ -1,5 +1,7 @@
 extends Node2D
 
+signal knob_bought
+
 onready var buy_knob_btn = find_node("BuyKnobBtn")
 onready var score_label = find_node("Score")
 onready var knob_price_label = find_node("KnobPrice")
@@ -11,10 +13,15 @@ var buy_knob_btn_disabled = preload("res://Game/UI/buy_knob_btn_disabled.png")
 
 func _ready():
 	GameData.connect("knob_price_changed", self, "update_knob_price_label")
-	GameData.connect("score_changed", self, "on_score_changed")
 	GameData.connect("score_changed", self, "update_score_label")
+	GameData.connect("knob_price_changed", self, "update_knob_btn_avability")
+	GameData.connect("score_changed", self, "update_knob_btn_avability")
+	
+	update_score_label()
+	update_knob_price_label()
+	update_knob_btn_avability()
 
-func on_score_changed() -> void:
+func update_knob_btn_avability() -> void:
 	if GameData.can_buy_knob():
 		buy_knob_btn.normal = buy_knob_btn_normal
 		buy_knob_btn.pressed = buy_knob_btn_pressed
@@ -38,5 +45,5 @@ func make_string(number:int) -> String:
 
 func _on_BuyKnobBtn_released():
 	if GameData.can_buy_knob():
+		emit_signal("knob_bought")
 		GameData.on_knob_buy()
-		knobs_manager.spawn_knob()

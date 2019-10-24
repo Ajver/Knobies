@@ -1,6 +1,9 @@
 extends Control
 
+onready var game_saver = $GameSaver
+
 func _ready():
+	game_saver.load_save()
 	randomize()
 	
 func _input(event):
