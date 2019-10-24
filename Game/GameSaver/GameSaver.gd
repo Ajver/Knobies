@@ -13,7 +13,6 @@ func save_game() -> void:
 	f.open(SAVE_PATH, File.WRITE)
 	f.store_line(to_json(data))
 	f.close()
-	print(data)
 	
 func get_data_to_save() -> Dictionary:
 	var data : Dictionary = {
@@ -42,7 +41,6 @@ func load_save():
 	var f = File.new()
 	
 	if not f.file_exists(SAVE_PATH):
-		print("could not find save file") 
 		return
 		
 	f.open(SAVE_PATH, File.READ)
