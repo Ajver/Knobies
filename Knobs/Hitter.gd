@@ -7,8 +7,7 @@ onready var hit_area_sprite = $HitAreaSprite
 onready var scale_tween = $ScaleTween
 onready var alpha_tween = $AlphaTween
 
-var radius : float = 50
-var radius_sqr : float = radius * radius
+var radius_sqr : float = GameData.hitter_radius * GameData.hitter_radius
 var strength : float = 1000
 
 func hit(hit_position:Vector2, knobs_array:Array) -> void:
@@ -36,9 +35,9 @@ func hit(hit_position:Vector2, knobs_array:Array) -> void:
 	GameData.add_score(knobs_in_range.size() * knobs_in_range.size() * 10)
 				
 func run_animations() -> void:
-	var animation_duration = 0.2;
+	var animation_duration = 10 / GameData.hitter_radius;
 	var texture_width : float = hit_area_sprite.texture.get_width()
-	var target_sprite_scale : float = radius / texture_width
+	var target_sprite_scale : float = GameData.hitter_radius / texture_width
 	
 	alpha_tween.interpolate_property(self, "modulate", start_color, end_color, animation_duration, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	alpha_tween.start()

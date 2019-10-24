@@ -6,6 +6,7 @@ signal knob_price_changed
 
 var score : int = 0
 var knob_price : int = 100
+var hitter_radius : float = 50.0
 
 static func add_score(additional_score:int) -> void:
 	GameData.score += additional_score
@@ -17,6 +18,7 @@ static func can_buy_knob() -> bool:
 static func on_knob_buy() -> void:
 	GameData.add_score(-GameData.knob_price)
 	GameData.knob_price *= 2
+	GameData.hitter_radius *= 1.075
 	GameData.emit_signal("knob_price_changed")
 	
 	
