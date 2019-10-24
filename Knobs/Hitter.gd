@@ -33,7 +33,7 @@ func hit(hit_position:Vector2, knobs_array:Array) -> void:
 		knob.on_hit(force_vector * knobs_in_range.size())
 		
 	GameData.add_score(knobs_in_range.size() * knobs_in_range.size() * 10)
-				
+	
 func run_animations() -> void:
 	var animation_duration = min(GameData.hitter_radius * 0.004, 0.5)
 	var texture_width : float = hit_area_sprite.texture.get_width()

@@ -2,8 +2,10 @@ extends Node
 
 const SAVE_PATH : String = "user://knobies.data"
 
-onready var knobs_manager = get_node("/root/Game").find_node("KnobsManager")
+onready var game = get_node("/root/Game")
+onready var knobs_manager = game.find_node("KnobsManager")
 onready var next_save_timer = $NextSaveTimer
+onready var background = game.find_node("Background")
 
 func save_game() -> void:
 	var data = get_data_to_save()
@@ -11,11 +13,13 @@ func save_game() -> void:
 	f.open(SAVE_PATH, File.WRITE)
 	f.store_line(to_json(data))
 	f.close()
+	print(data)
 	
 func get_data_to_save() -> Dictionary:
 	var data : Dictionary = {
 		"score": GameData.score,
 		"hitter_radius": GameData.hitter_radius,
+		"next_background_index": background.next_index,
 		"knobs_array": []
 	}
 	
@@ -53,6 +57,7 @@ func load_variables(data:Dictionary) -> void:
 	GameData.hitter_radius = float(data["hitter_radius"])
 	GameData.set_knob_price(data["knobs_array"].size())
 	knobs_manager.on_load(data["knobs_array"])
+	background.set_next_index(int(data["next_background_index"]))
 	
 func _on_NextSaveTimer_timeout():
 	save_game()
