@@ -30,18 +30,20 @@ func update_knob_btn_avability() -> void:
 		buy_knob_btn.pressed = null
 
 func update_score_label() -> void:
-	score_label.text = make_string(GameData.score)
+	score_label.text = make_string(GameData.score, 0.01)
 	
 func update_knob_price_label() -> void:
-	knob_price_label.text = make_string(GameData.knob_price)
+	knob_price_label.text = make_string(GameData.knob_price, 0.1)
 
-func make_string(number:int) -> String:
+func make_string(number:int, step:float) -> String:
 	if number < 1000:
 		return str(number)
 	elif number < 1000000:
-		return str(stepify(number/1000.0, 0.1), "k")
+		return str(stepify(number/1000.0, step), "k")
+	elif number < 1000000000:
+		return str(stepify(number/1000000.0, step), "m")
 	else:
-		return str(stepify(number/1000000.0, 0.1), "m")
+		return str(stepify(number/1000000000.0, step), "g")
 
 func _on_BuyKnobBtn_released():
 	if GameData.can_buy_knob():

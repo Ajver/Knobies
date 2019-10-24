@@ -20,9 +20,20 @@ static func can_buy_knob() -> bool:
 	
 static func on_knob_buy() -> void:
 	GameData.add_score(-GameData.knob_price)
-	GameData.knob_price *= 2
-	GameData.hitter_radius *= 1.075
+	GameData.knob_price = GameData.get_next_knob_price()
+	GameData.hitter_radius *= 1.07
 	GameData.emit_signal("knob_price_changed")
+
+static func get_next_knob_price() -> int:
+	var next_price : float = GameData.knob_price * 1.8
+	if next_price < 1000:
+		return int((next_price) / 10) * 10
+	elif next_price < 1000000:
+		return int((next_price) / 100) * 100
+	elif next_price < 1000000000:
+		return int((next_price) / 100000) * 100000
+	else:
+		return int((next_price) / 100000000) * 100000000
 	
 static func set_knob_price(knobs_count:int) -> void:
 	for i in range(knobs_count):
