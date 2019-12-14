@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Game/Game.gd" type="Script" id=1]
 [ext_resource path="res://Game/Background/Background.tscn" type="PackedScene" id=2]
@@ -11,7 +11,8 @@
 [ext_resource path="res://Game/Walls.gd" type="Script" id=9]
 [ext_resource path="res://Knobs/KnobsManager.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Sounds/click.wav" type="AudioStream" id=11]
-[ext_resource path="res://Game/GameSaver/GameSaver.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Game/ScreenHitAudio.gd" type="Script" id=12]
+[ext_resource path="res://Game/GameSaver/GameSaver.tscn" type="PackedScene" id=13]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.5
@@ -113,9 +114,10 @@ position = Vector2( 80, 50 )
 [node name="ScreenHitAudio" type="AudioStreamPlayer" parent="World"]
 stream = ExtResource( 11 )
 volume_db = -10.651
+script = ExtResource( 12 )
 
-[node name="GameSaver" parent="." instance=ExtResource( 12 )]
-[connection signal="knob_bought" from="UI" to="Background" method="_on_Knob_bought"]
-[connection signal="knob_bought" from="UI" to="GameSaver" method="_on_Knob_bought"]
+[node name="GameSaver" parent="." instance=ExtResource( 13 )]
 [connection signal="knob_bought" from="UI" to="World/KnobsManager" method="_on_Knob_bought"]
+[connection signal="knob_bought" from="UI" to="GameSaver" method="_on_Knob_bought"]
+[connection signal="knob_bought" from="UI" to="Background" method="_on_Knob_bought"]
 [connection signal="released" from="UI/MarginContainer/VBoxContainer/Control/BuyKnobBtn" to="UI" method="_on_BuyKnobBtn_released"]

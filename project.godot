@@ -55,6 +55,7 @@ limits/debugger_stdout/max_errors_per_frame=60
 
 [physics]
 
+common/physics_fps=180
 2d/default_gravity=500
 
 [rendering]
