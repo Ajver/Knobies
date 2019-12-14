@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Game/Game.gd" type="Script" id=1]
 [ext_resource path="res://Game/Background/Background.tscn" type="PackedScene" id=2]
@@ -6,9 +6,12 @@
 [ext_resource path="res://Fonts/Font_14.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Game/UI/buy_knob_btn_disabled.png" type="Texture" id=5]
 [ext_resource path="res://Game/UI/buy_knob_btn_pressed.png" type="Texture" id=6]
-[ext_resource path="res://Game/Walls.gd" type="Script" id=7]
-[ext_resource path="res://Knobs/KnobsManager.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Game/GameSaver/GameSaver.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Sounds/knob_buy.wav" type="AudioStream" id=7]
+[ext_resource path="res://Sounds/knob_available.wav" type="AudioStream" id=8]
+[ext_resource path="res://Game/Walls.gd" type="Script" id=9]
+[ext_resource path="res://Knobs/KnobsManager.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Sounds/click.wav" type="AudioStream" id=11]
+[ext_resource path="res://Game/GameSaver/GameSaver.tscn" type="PackedScene" id=12]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.5
@@ -74,13 +77,19 @@ custom_fonts/font = ExtResource( 4 )
 text = "100"
 valign = 1
 
+[node name="KnobBuyAudio" type="AudioStreamPlayer" parent="UI"]
+stream = ExtResource( 7 )
+
+[node name="KnobAvailableAudio" type="AudioStreamPlayer" parent="UI"]
+stream = ExtResource( 8 )
+
 [node name="World" type="Node2D" parent="."]
 
 [node name="Walls" type="StaticBody2D" parent="World"]
 editor/display_folded = true
 visible = false
 physics_material_override = SubResource( 1 )
-script = ExtResource( 7 )
+script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Walls"]
 position = Vector2( -70, 120 )
@@ -98,11 +107,15 @@ shape = SubResource( 3 )
 position = Vector2( 85, 305 )
 shape = SubResource( 3 )
 
-[node name="KnobsManager" parent="World" instance=ExtResource( 8 )]
+[node name="KnobsManager" parent="World" instance=ExtResource( 10 )]
 position = Vector2( 80, 50 )
 
-[node name="GameSaver" parent="." instance=ExtResource( 9 )]
-[connection signal="knob_bought" from="UI" to="World/KnobsManager" method="_on_Knob_bought"]
-[connection signal="knob_bought" from="UI" to="GameSaver" method="_on_Knob_bought"]
+[node name="ScreenHitAudio" type="AudioStreamPlayer" parent="World"]
+stream = ExtResource( 11 )
+volume_db = -10.651
+
+[node name="GameSaver" parent="." instance=ExtResource( 12 )]
 [connection signal="knob_bought" from="UI" to="Background" method="_on_Knob_bought"]
+[connection signal="knob_bought" from="UI" to="GameSaver" method="_on_Knob_bought"]
+[connection signal="knob_bought" from="UI" to="World/KnobsManager" method="_on_Knob_bought"]
 [connection signal="released" from="UI/MarginContainer/VBoxContainer/Control/BuyKnobBtn" to="UI" method="_on_BuyKnobBtn_released"]

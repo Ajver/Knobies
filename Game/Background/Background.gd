@@ -4,6 +4,7 @@ export(float) var tween_duration
 
 onready var knobs_manager = get_node("/root/Game").find_node("KnobsManager")
 onready var change_color_tween = $ChangeColorTween
+onready var change_color_audio = $ChangeColorAudio
 
 const COLORS : Array = [
 	Color8(8, 68, 162),
@@ -24,12 +25,13 @@ func change_color() -> void:
 	change_color_tween.interpolate_property(self, "color", color, COLORS[next_index], tween_duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	change_color_tween.start()
 	next_index += 1
+	change_color_audio.play()
 
 func _on_Knob_bought() -> void:
 	if next_index >= COLORS.size():
 		return
 		
-	if knobs_manager.get_child_count() >= next_index * 5:
+	if knobs_manager.get_child_count() >= next_index * 5 - 1:
 		change_color()
 	
 func set_next_index(value:int) -> void:

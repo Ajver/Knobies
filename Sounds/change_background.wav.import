@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/change_background.wav-71bf157272e4f03a19282cc1769f3737.sample"
+
+[deps]
+
+source_file="res://Sounds/change_background.wav"
+dest_files=[ "res://.import/change_background.wav-71bf157272e4f03a19282cc1769f3737.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
