@@ -117,7 +117,7 @@ volume_db = -10.651
 script = ExtResource( 12 )
 
 [node name="GameSaver" parent="." instance=ExtResource( 13 )]
-[connection signal="knob_bought" from="UI" to="World/KnobsManager" method="_on_Knob_bought"]
 [connection signal="knob_bought" from="UI" to="GameSaver" method="_on_Knob_bought"]
+[connection signal="knob_bought" from="UI" to="World/KnobsManager" method="_on_Knob_bought"]
 [connection signal="knob_bought" from="UI" to="Background" method="_on_Knob_bought"]
 [connection signal="released" from="UI/MarginContainer/VBoxContainer/Control/BuyKnobBtn" to="UI" method="_on_BuyKnobBtn_released"]

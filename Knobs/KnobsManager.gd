@@ -1,7 +1,7 @@
 extends Position2D
 
 var Knob = preload("res://Knobs/Knob.tscn")
-var Hitter = preload("res://Knobs/Hitter.tscn")
+var Hitter = preload("res://Knobs/Hitter/Hitter.tscn")
 
 onready var game = get_node("/root/Game")
 onready var screen_hit_audio = game.find_node("ScreenHitAudio")
